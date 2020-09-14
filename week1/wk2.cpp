@@ -1,5 +1,8 @@
-#include <iostream>
-int main()
+#include <bits/stdc++.h>
+using namespace std;
+
+char NextDay()
+/* int main()
 {
-    std::cout << "Hello World~\n";
-}
+    
+} */

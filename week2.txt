@@ -1,0 +1,283 @@
+(1)
+double distance(double x1, double y1, double x2, double y2)
+{
+    double deltaX = x2 - x1;
+    double deltaY = y2 - y1;
+    double result;
+    result = pow(deltaX, 2.0) + pow(deltaY, 2.0);
+    result = pow(result, 0.5);
+    return result;
+}
+
+(2)
+int daysOfMonths[] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+
+int judgeLeapYear(int year)
+{
+    if ((year % 400 == 0) || (year % 4 == 0 && year % 100 != 0))
+        return 1;
+    else
+        return 0;
+}
+
+int getDays(int year, int month)
+{
+    if (judgeLeapYear(year) == 1 && month == 2)
+        return 29;
+    else
+        return daysOfMonths[month - 1];
+}
+
+char *NextDay(int year, int month, int day)
+{
+    static char result[50];
+    day++;
+    if (day > getDays(year, month))
+    {
+        day = 1;
+        month++;
+        if (month > 12)
+        {
+            month = 1;
+            year++;
+        }
+    }
+
+    char str1[10], str2[10], str3[10];
+    itoa(year, str1, 10);
+    itoa(month, str2, 10);
+    itoa(day, str3, 10);
+    strcat(result, str1);
+    strcat(result, "/");
+    strcat(result, str2);
+    strcat(result, "/");
+    strcat(result, str3);
+    return result;
+}
+
+(3)
+int main()
+{
+    srand(time(NULL));
+    //creat a random matrix
+    int ma[5][5];
+    for (int i = 0; i < 5; i++)
+    {
+        for (int j = 0; j < 5; j++)
+        {
+            ma[i][j] = rand() % 100;
+        }
+    }
+    
+    for (int i = 0; i < 5; i++)
+    {
+        for (int j = 0; j < 5; j++)
+        {
+            if (j == 4)
+                cout << setw(5) << ma[i][j] << endl;
+            else
+                cout << setw(5) << ma[i][j] << " ";
+        }
+    }
+    cout << endl;
+    for (int i = 0; i < 5; i++)
+    {
+        for (int j = 0; j < 5; j++)
+        {
+            if (j == 4)
+                cout << setw(5) << ma[j][i] << endl;
+            else
+                cout << setw(5) << ma[j][i] << " ";
+        }
+    }
+
+    system("pause");
+}
+
+(4)
+void getSaddlePoint(int ma[5][5])
+{
+
+    int flag = 0;
+    //r=row, c=colomn
+
+    //大行小列
+    for (int r = 0; r < 5; r++)
+    {
+        int judge = 1;
+        int flagColomn = 0;
+        int max = ma[r][0];
+        for (int c = 0; c < 5; c++) //遍历第r行
+        {
+            if (ma[r][c] > max)
+            {
+                max = ma[r][c];
+                flagColomn = c;
+            }
+        }
+
+        for (int i = 0; i < 5; i++)
+        {
+            if (ma[i][flagColomn] < max)
+            {
+                judge = 0;
+                break;
+            }
+        }
+        if (judge)
+        {
+            cout << "Found a saddle point1 " << max << endl;
+            flag = 1;
+        }
+    }
+
+    //小行大列
+    for (int r = 0; r < 5; r++)
+    {
+        int judge = 1;
+        int flagRow = 0;
+        int min = ma[r][0];
+        for (int c = 0; c < 5; c++) //遍历第r行
+        {
+            if (ma[r][c] < min)
+            {
+                min = ma[r][c];
+                flagRow = c;
+            }
+        }
+
+        for (int i = 0; i < 5; i++)
+        {
+            if (ma[i][flagRow] > min)
+            {
+                judge = 0;
+                break;
+            }
+        }
+        if (judge)
+        {
+            cout << "Found a saddle point2 " << min << endl;
+            flag = 1;
+        }
+    }
+
+    if (flag == 0)
+        cout << "No saddle point in this matrix" << endl;
+}
+
+(5)
+int Fibonacci(int n)
+{
+    if (n == 0)
+        return 0;
+    if (n == 1)
+        return 1;
+    else
+        return Fibonacci(n - 1) + Fibonacci(n - 2);
+}
+
+(7)
+template <typename T>
+void ShowTypeSize(const char *type, T x)
+{
+    int num = sizeof(x);
+    cout << "sizeof(" << type << "):  " << num << " byte(s)" << endl;
+}
+
+(8)
+运行结果：
+(10)
+#include <bits/stdc++.h>
+using namespace std;
+
+int Sum(int n)
+{
+    int sum = 0;
+    while (n)
+    {
+        sum += n % 10;
+        n /= 10;
+    }
+    return sum;
+}
+
+int cmpInt(const void *a, const void *b)
+{
+    return Sum(*(int *)a) - Sum(*(int *)b);
+}
+int cmpDouble(const void *a, const void *b)
+{
+    return *(double *)a - *(double *)b;
+}
+int cmpChar(const void *a, const void *b)
+{
+    int size1 = strlen(*(char **)a);
+    int size2 = strlen(*(char **)b);
+    if (size1 > size2)
+        return 1;
+    else if (size1 == size2)
+        return strcmp(*(char **)a, *(char **)b);
+    else
+        return -1;
+}
+
+int main()
+{
+    int a[10] = {12, 32, 42, 51, 8, 16, 51, 21, 19, 9};
+    double b[10] = {32.1, 456.87, 332.67, 442.0, 98.12, 451.79, 340.12, 54.55, 99.87, 72.5};
+    char *c[10] = {"enter", "number", "size", "begin", "of", "cat", "case", "program", "certain", "a"};
+    /*  Sort int */
+    qsort(a, 10, sizeof(int), cmpInt);
+    for (int i = 0; i < 10; i++)
+    {
+        cout << a[i] << " ";
+    }
+    cout << endl;
+    /* Sort double */
+    qsort(b, 10, sizeof(double), cmpDouble);
+    for (int i = 0; i < 10; i++)
+    {
+        cout << b[i] << " ";
+    }
+    cout << endl;
+    /* Sort string */
+    qsort(c, 10, sizeof(*c), cmpChar);
+    for (int i = 0; i < 10; i++)
+    {
+        cout << c[i] << " ";
+    }
+    system("pause");
+}
+
+int main()
+{
+    for (int i = 0; i < 50; i++)
+    {
+        srand(time(NULL));
+        //creat a random matrix
+        int ma[5][5];
+        for (int i = 0; i < 5; i++)
+        {
+            for (int j = 0; j < 5; j++)
+            {
+                ma[i][j] = rand() % 100;
+            }
+        }
+
+        for (int i = 0; i < 5; i++)
+        {
+            for (int j = 0; j < 5; j++)
+            {
+                if (j == 4)
+                    cout << setw(5) << ma[i][j] << endl;
+                else
+                    cout << setw(5) << ma[i][j] << " ";
+            }
+        }
+        cout << endl;
+
+        getSaddlePoint(ma);
+    }
+    getchar();
+    getchar();
+}

@@ -176,6 +176,9 @@ int Fibonacci(int n)
         return Fibonacci(n - 1) + Fibonacci(n - 2);
 }
 
+(6)
+功能：以二进制形式输出
+
 (7)
 template <typename T>
 void ShowTypeSize(const char *type, T x)
@@ -186,6 +189,11 @@ void ShowTypeSize(const char *type, T x)
 
 (8)
 运行结果：
+127
+1111111
+177
+7F
+
 (10)
 #include <bits/stdc++.h>
 using namespace std;

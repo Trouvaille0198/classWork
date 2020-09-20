@@ -4,3 +4,4 @@ new的用法 https://blog.csdn.net/qq_40618238/article/details/80217960?utm_medi
 整型的三种传递 https://blog.csdn.net/wangyangyangcumt/article/details/46999357
 字符串的一些知识  https://blog.csdn.net/Kobe51920/article/details/89607979?utm_medium=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-5.channel_param&depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-5.channel_param
 qsort详解  https://www.cnblogs.com/sjy123/p/3287817.html
+const char相关  https://blog.csdn.net/VVVLeHr/article/details/86697346

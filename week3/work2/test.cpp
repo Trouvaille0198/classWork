@@ -1,5 +1,5 @@
 #include "CSolver.cpp"
-//#include "CSolver.h"
+#include "CSolver.h"
 #include <bits/stdc++.h>
 using namespace std;
 int main()

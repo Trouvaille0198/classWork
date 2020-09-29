@@ -33,14 +33,34 @@ struct Dot
 }
  */
 
-void InsertFirst(Dot *&head)
+/* void InsertFirst(Dot *&head)
 {
     Dot *p;
     p = new Dot;
     p->point.Set();
 
     if (head->next == NULL)
+    {
         head->next = p;
+        p->next = NULL;
+    }
+    else
+    {
+        p->next = head->next;
+        head->next = p;
+    }
+} */
+
+void InsertFirst(Dot *&head, Point poi)
+{
+    Dot *p;
+    p = new Dot;
+    p->point = poi;
+    if (head->next == NULL)
+    {
+        head->next = p;
+        p->next = NULL;
+    }
     else
     {
         p->next = head->next;
@@ -58,9 +78,11 @@ void DisplayList(Dot *&head)
     }
 }
 
+Point p1(1, 1);
+
 int main()
 {
-    Dot *head;
+    /*   Dot *head;
     head = new Dot;
     head->next = NULL;
     cout << "1" << endl;
@@ -70,6 +92,22 @@ int main()
     cout << "3" << endl;
     InsertFirst(head);
     cout << "4" << endl;
+    DisplayList(head);
+    system("pause"); */
+
+    Point p2(2, 2);
+    Point pArray[3] = {Point(9, 9), Point(8, 8), Point(7, 7)};
+    Point *p = new Point(3, 3);
+
+    Dot *head = new Dot;
+    head->next = NULL;
+    InsertFirst(head, p1);
+    InsertFirst(head, p2);
+    for (int i = 0; i < 3; i++)
+    {
+        InsertFirst(head, pArray[i]);
+    }
+    InsertFirst(head, *p);
     DisplayList(head);
     system("pause");
 }

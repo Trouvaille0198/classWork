@@ -18,7 +18,7 @@ Point &Point::operator=(const Point &N)
 {
     if (&N != this)
     {
-        if (m_x != NULL)
+        if (m_x != NULL && m_y != NULL)
         {
             delete m_x;
             delete m_y;
@@ -38,9 +38,10 @@ Point::~Point()
     }
 }
 
-void Point::Show()
+void Point::Show() const
 {
     cout << *m_x << ", " << *m_y << endl;
+    /*  cout << "ahhhhhhhhhhhhhhhhhhh" << endl; */
 }
 
 void Point::Set()

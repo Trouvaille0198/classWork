@@ -1,2 +1,2 @@
 # classWork
-For our stupid class.
+For our class.

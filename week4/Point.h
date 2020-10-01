@@ -11,6 +11,8 @@ public:
     Point(const Point &N);
     Point &operator=(const Point &N);
     ~Point();
+    int Showm_x() const;
+    int Showm_y() const;
     void Show() const;
     void Set();
 };

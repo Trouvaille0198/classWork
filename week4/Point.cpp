@@ -54,3 +54,12 @@ void Point::Set()
     this->m_x = new int(x);
     this->m_y = new int(y);
 }
+
+int Point::Showm_x() const
+{
+    return *m_x;
+}
+int Point::Showm_y() const
+{
+    return *m_y;
+}

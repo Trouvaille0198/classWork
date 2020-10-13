@@ -129,6 +129,7 @@ int main()
     {
         InsertFirst(head, pArray[i]);
     }
+    DisplayList(head);
     DeleteFirst(head);
     DisplayList(head);
     SearchList(head, 5);

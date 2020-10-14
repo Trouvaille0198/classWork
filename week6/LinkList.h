@@ -11,6 +11,7 @@ public:
     Link &operator=(const Link &a);
     ~Link();
     static void Show();
+    static void ShowGrade(int flag);
 
 private:
     int m_number;
@@ -22,10 +23,13 @@ private:
     static int num;
 };
 
-Link::Link(int num, string name, int age, int grade)
+Link *Link::head = NULL;
+int Link::num = 0;
+
+Link::Link(int number, string name, int age, int grade)
 {
     num++;
-    m_number = num;
+    m_number = number;
     m_name = name;
     m_age = age;
     m_grade = grade;
@@ -63,15 +67,47 @@ Link::~Link()
 {
     Link *pGuard = head;
     if (head == this)
-        head = next;
+        head = this->next;
     else
     {
         while (pGuard->next != this)
             pGuard = pGuard->next;
-        pGuard->next = next;
+        pGuard->next = this->next;
     }
     num--;
-    cout << "æžæž„ä¸€ä¸ªå¯¹è±¡" << m_name << endl;
+    cout << "ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½" << m_name << endl;
 }
 
+void Link::Show()
+{
+    Link *p;
+    cout << "Number of nodes: " << num << endl;
+    for (p = head; p != NULL; p = p->next)
+    {
+        cout << "00" << p->m_number << "  " << p->m_name << "  " << p->m_age << "Ëê " << p->m_grade << "·Ö" << endl;
+    }
+}
+
+void Link::ShowGrade(int flag)
+{
+    Link *p;
+    Link *HighGra, *LowGra;
+    HighGra = head;
+    LowGra = head;
+    for (p = head; p->next != NULL; p = p->next)
+    {
+        if (p->next->m_grade > HighGra->m_grade)
+        {
+            HighGra = p->next;
+        }
+        if (p->next->m_grade < LowGra->m_grade)
+        {
+            LowGra = p->next;
+        }
+    }
+    if (flag == 1)
+        cout << "³É¼¨×î¸ßµÄÊÇ£º" << HighGra->m_name << endl;
+    else
+        cout << "³É¼¨×îµÍµÄÊÇ£º" << LowGra->m_name << endl;
+}
 #endif

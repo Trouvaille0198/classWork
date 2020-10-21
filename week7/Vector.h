@@ -2,7 +2,6 @@
 #define VECTOR_H
 #include <bits/stdc++.h>
 using namespace std;
-
 template <typename T>
 class Vector
 {
@@ -11,7 +10,10 @@ public:
     Vector(const Vector<T> &N);
     ~Vector();
     Vector &operator=(const Vector<T> &N);
-    void Show();
+    /*功能函数*/
+    void Show() const;
+    T GetLen() const;
+    void Resize(int num);
     /*双目运算符重载*/
     template <typename TYPE>
     friend Vector<TYPE> operator+(const Vector<TYPE> &v1, const Vector<TYPE> &v2);
@@ -28,8 +30,15 @@ public:
     Vector<T> &operator--(); //前置--
     Vector<T> operator++(T); //后置++
     Vector<T> operator--(T); //后置--
-
+    /*关系运算符重载*/
+    bool operator==(const Vector<T> &v1);
+    bool operator!=(const Vector<T> &v1);
     T &operator[](int index) const; //下标运算符
+    /*IO流操作运算符重载*/
+    template <typename TYPE>
+    friend istream &operator>>(istream &in, const Vector<TYPE> &v1);
+    template <typename TYPE>
+    friend ostream &operator<<(ostream &in, const Vector<TYPE> &v1);
 
 private:
     T *m_coor;
@@ -84,14 +93,50 @@ Vector<T> &Vector<T>::operator=(const Vector<T> &N)
 }
 
 template <typename T>
-void Vector<T>::Show()
+void Vector<T>::Show() const
 {
-    cout << "此" << m_len << "维数组的坐标为: (";
+    cout << "The coordinates of this " << m_len << "-dimensional vector are: (";
     for (int i = 0; i < m_len - 1; i++)
     {
         cout << m_coor[i] << ", ";
     }
     cout << m_coor[m_len - 1] << ")" << endl;
+}
+
+template <typename T>
+T Vector<T>::GetLen() const
+{
+    return m_len;
+}
+
+template <typename T>
+void Vector<T>::Resize(int num)
+{
+    if (num < 0)
+    {
+        T *temp = m_coor;
+        //delete[] m_coor; //不可delete，下同
+        m_coor = new T[m_len + num];
+        for (int i = 0; i < m_len + num; i++)
+        {
+            m_coor[i] = temp[i];
+        }
+        delete[] temp; //此处delete，待证，下同
+        m_len += num;
+    }
+    else if (num > 0)
+    {
+        T *temp = m_coor;
+        m_coor = new T[m_len + num];
+        for (int i = 0; i < m_len + num; i++)
+        {
+            m_coor[i] = (i < m_len) ? temp[i] : 0;
+        }
+        delete[] temp;
+        m_len += num;
+    }
+    else
+        return;
 }
 
 template <typename T>
@@ -189,9 +234,61 @@ Vector<T> Vector<T>::operator--(T)
 }
 
 template <typename T>
+bool Vector<T>::operator==(const Vector<T> &v1)
+{
+    if (m_len != v1.m_len)
+        return false;
+    else
+    {
+        int count = 0;
+        for (int i = 0; i < m_len; i++)
+        {
+            if (m_coor[i] == v1.m_coor[i])
+                count++;
+        }
+        if (count == m_len)
+            return true;
+        else
+            return false;
+    }
+}
+
+template <typename T>
+bool Vector<T>::operator!=(const Vector<T> &v1)
+{
+    return !(*this == v1);
+}
+
+template <typename T>
 T &Vector<T>::operator[](int index) const
 {
     return m_coor[index];
+}
+
+template <typename T>
+istream &operator>>(istream &in, const Vector<T> &v1)
+{
+    cout << "Please input the dimension of the vector being create: ";
+    cin >> v1.m_len;
+    cout << endl
+         << "input the coordinates: ";
+    for (int i = 0; i < v1.m_len; i++)
+    {
+        cin >> v1[i];
+    }
+    return in;
+}
+
+template <typename T>
+ostream &operator<<(ostream &out, const Vector<T> &v1)
+{
+    cout << "(";
+    for (int i = 0; i < v1.m_len - 1; i++)
+    {
+        cout << v1[i] << ", ";
+    }
+    cout << v1[v1.m_len - 1] << ")";
+    return out;
 }
 
 #endif

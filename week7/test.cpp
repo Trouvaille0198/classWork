@@ -8,7 +8,9 @@ int main()
     int b[4] = {1, 4, 6, 8};
 
     Vector<int> vec1(a, 4), vec2(b, 4);
-    Vector<int> vec3(vec1 - vec2);
-    vec3.Show();
+    //Vector<int> vec3(vec1 + vec2);
+    //vec1.Resize(2);
+    //cout << vec1 << endl;
+    cout << vec2;
     system("pause");
 }

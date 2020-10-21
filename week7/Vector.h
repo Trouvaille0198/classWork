@@ -26,19 +26,19 @@ public:
     Vector<T> &operator+=(const Vector<T> &v1);
     Vector<T> &operator-=(const Vector<T> &v1);
     /*单目运算符重载*/
-    Vector<T> &operator++(); //前置++
-    Vector<T> &operator--(); //前置--
-    Vector<T> operator++(T); //后置++
-    Vector<T> operator--(T); //后置--
+    Vector<T> &operator++();   //前置++
+    Vector<T> &operator--();   //前置--
+    Vector<T> operator++(int); //后置++
+    Vector<T> operator--(int); //后置--
     /*关系运算符重载*/
     bool operator==(const Vector<T> &v1);
     bool operator!=(const Vector<T> &v1);
     T &operator[](int index) const; //下标运算符
     /*IO流操作运算符重载*/
     template <typename TYPE>
-    friend istream &operator>>(istream &in, const Vector<TYPE> &v1);
+    friend istream &operator>>(istream &in, Vector<TYPE> &v1);
     template <typename TYPE>
-    friend ostream &operator<<(ostream &in, const Vector<TYPE> &v1);
+    friend ostream &operator<<(ostream &out, const Vector<TYPE> &v1);
 
 private:
     T *m_coor;
@@ -121,7 +121,7 @@ void Vector<T>::Resize(int num)
         {
             m_coor[i] = temp[i];
         }
-        delete[] temp; //此处delete，待证，下同
+        //delete[] temp; //此处delete，待证，下同
         m_len += num;
     }
     else if (num > 0)
@@ -132,7 +132,7 @@ void Vector<T>::Resize(int num)
         {
             m_coor[i] = (i < m_len) ? temp[i] : 0;
         }
-        delete[] temp;
+        //delete[] temp;
         m_len += num;
     }
     else
@@ -218,7 +218,7 @@ Vector<T> &Vector<T>::operator--()
 }
 
 template <typename T>
-Vector<T> Vector<T>::operator++(T)
+Vector<T> Vector<T>::operator++(int)
 {
     Vector<T> result(*this); //拷贝构造
     ++(*this);               //利用前置运算符重载函数
@@ -226,7 +226,7 @@ Vector<T> Vector<T>::operator++(T)
 }
 
 template <typename T>
-Vector<T> Vector<T>::operator--(T)
+Vector<T> Vector<T>::operator--(int)
 {
     Vector<T> result(*this); //拷贝构造
     --(*this);               //利用前置运算符重载函数
@@ -266,7 +266,7 @@ T &Vector<T>::operator[](int index) const
 }
 
 template <typename T>
-istream &operator>>(istream &in, const Vector<T> &v1)
+istream &operator>>(istream &in, Vector<T> &v1)
 {
     cout << "Please input the dimension of the vector being create: ";
     cin >> v1.m_len;

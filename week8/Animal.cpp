@@ -4,7 +4,7 @@ using namespace std;
 class Animal
 {
 public:
-    virtual void Sound() const {};
+    virtual void Sound() const = 0;
 };
 class Cat : public Animal
 {

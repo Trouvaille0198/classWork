@@ -61,9 +61,6 @@ public:
     {
         this->m_math = math;
     }
-    /*IO流操作运算符重载*/
-    //friend istream &operator>>(istream &in, Student &a);
-    //friend ostream &operator<<(ostream &out, Student &a);
 
 private:
     string m_id;
@@ -134,10 +131,12 @@ public:
             }
         }
     }
+
     static AutoLink *GetHead()
     {
         return head;
     }
+
     static void ShowAll()
     {
         for (AutoLink *p = head; p != NULL; p = p->next)
@@ -156,7 +155,7 @@ private:
     static int num;
 };
 
-AutoLink AutoLink::*head = NULL;
+AutoLink *AutoLink::head = NULL;
 int AutoLink::num = 0;
 
 void ShowAll(AutoLink *HEAD)
@@ -184,7 +183,9 @@ int main()
         i++;
     }
     AutoLink Stu1(Stu[0]), Stu2(Stu[1]), Stu3(Stu[2]), Stu4(Stu[3]);
+
     AutoLink::ShowAll();
+
     ShowAll(AutoLink::GetHead());
     AutoLink *HEAD = AutoLink::GetHead();
     Stu[0].ChangeLanguage(100);

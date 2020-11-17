@@ -9,7 +9,7 @@ public:
     Vector(T *coor = NULL, int len = 0);
     Vector(const Vector<T> &N);
     ~Vector();
-    Vector &operator=(const Vector<T> &N);
+    Vector<T> &operator=(const Vector<T> &N);
     /*功能函数*/
     void Show() const;
     T GetLen() const;

@@ -81,12 +81,9 @@ public:
         head = this;
         cout << "Create a student information" << endl;
     }
-    AutoLink(string ID, string NAME, int a, int b) //构造函数
+    AutoLink(string ID, string NAME, int a, int b) : man(ID, NAME, a, b) //构造函数
     {
         num++;
-        Student stu(ID, NAME, a, b);
-        man = stu;
-
         this->next = head;
         head = this;
         cout << "Create a student information" << endl;

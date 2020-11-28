@@ -104,6 +104,7 @@ public:
         num--;
         cout << "Delete the list successfully" << endl;
     }
+
     void ChangeAutoLinkFirst(Student &a)
     {
         head->man = a;
